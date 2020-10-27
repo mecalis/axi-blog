@@ -24,6 +24,7 @@ from . import views
 #login-logout
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
 
 
 from searches.views import search_view
@@ -56,7 +57,9 @@ urlpatterns = [
     path('register/', views.UserFormView.as_view(), name='register'),
     path('not_logged_in/', not_logged_in),
     path('login/', login_view),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    #path('logout/', auth_views.LogoutView.as_view(template_name='logout_template.html')),
+    path('logout/', auth_views.LogoutView.as_view(next_page=home_page)),
+    #path("logout/", auth_views.logout, {'next_page': '/'} ,name="logout"),
     #path('logout/', logout_view),
 
 ]

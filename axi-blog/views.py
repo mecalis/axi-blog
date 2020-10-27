@@ -13,10 +13,10 @@ from blog.models import BlogPost
 
 
 def home_page(request):
-    my_title = "Hello there...."
+    my_title = "Helló, helló!"
     qs = BlogPost.objects.all()[:5]
     form = UserFrorm
-    context = {"title": "Welcome to Try Django", 'blog_list': qs, "form": form}
+    context = {"title": "Üdv itt. Minden tesztelés alatt!", 'blog_list': qs, "form": form}
     return render(request, "home.html", context)
 
 

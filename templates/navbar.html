@@ -16,11 +16,13 @@
 
 
     {% if request.user.is_authenticated %}
-
             <a class="nav-link" href="/logout/">Logout</a>
 
     {% else %}
         {% include 'login_template.html' %}
+        <span>or</span>
+        <a class="nav-link" href="/register">Register</a>
+
     {% endif %}
 
     <form class="form-inline my-2 my-lg-0" action='/search/'>
