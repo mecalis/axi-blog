@@ -22,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+ic8cucqn9k$8v$x940il^-3%df2$q%m%0ns(91^ur($(^+&-9'
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', 'https://axi-blog.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', '.knockhq.com', 'https://axi-blog.herokuapp.com','127.0.0.1']
 
 LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = 'home'
 
 # Application definition
 
@@ -38,6 +41,7 @@ INSTALLED_APPS = [ # components
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tasks',
 
     'blog',
     'searches',
@@ -132,6 +136,8 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH, 'media')
 MEDIA_URL = '/media/' # django-storages
+
+LOGOUT_REDIRECT_URL = ""
 
 
 

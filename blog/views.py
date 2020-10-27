@@ -7,6 +7,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import BlogPostModelForm
 from .models import BlogPost
 
+#from ..forms import UserFrorm
+
 # CRUD
 
 # GET -> Retrieve / List
@@ -20,12 +22,13 @@ from .models import BlogPost
 def blog_post_list_view(request):
     # list out objects 
     # could be search
+    #form = UserFrorm
     qs = BlogPost.objects.all().published() # queryset -> list of python object
     if request.user.is_authenticated:
         my_qs = BlogPost.objects.filter(user=request.user)
         qs = (qs | my_qs).distinct()
     template_name = 'blog/list.html'
-    context = {'object_list': qs}
+    context = {'object_list': qs, "form":form}
     return render(request, template_name, context) 
 
 

@@ -19,13 +19,22 @@ from django.urls import path, re_path, include # url
 from blog.views import (
     blog_post_create_view,
 )
+from . import views
+
+#login-logout
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LogoutView
+
 
 from searches.views import search_view
 from .views import (
     home_page,
     about_page,
     contact_page,
-    example_page
+    example_page,
+    not_logged_in,
+    login_view,
+    logout_view,
 )
 
 
@@ -43,6 +52,13 @@ urlpatterns = [
     path('example/', example_page),
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
+    path('tasks/', include('tasks.urls')),
+    path('register/', views.UserFormView.as_view(), name='register'),
+    path('not_logged_in/', not_logged_in),
+    path('login/', login_view),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    #path('logout/', logout_view),
+
 ]
 
 if settings.DEBUG:
