@@ -14,7 +14,7 @@ from blog.models import BlogPost
 
 def home_page(request):
     my_title = "Helló, helló!"
-    qs = BlogPost.objects.all()[:5]
+    qs = BlogPost.objects.all()[:3]
     form = UserFrorm
     context = {"title": "Üdv itt. Minden tesztelés alatt!", 'blog_list': qs, "form": form}
     return render(request, "home.html", context)

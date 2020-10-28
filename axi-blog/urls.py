@@ -53,7 +53,9 @@ urlpatterns = [
     path('example/', example_page),
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
+
     path('tasks/', include('tasks.urls')),
+
     path('register/', views.UserFormView.as_view(), name='register'),
     path('not_logged_in/', not_logged_in),
     path('login/', login_view),

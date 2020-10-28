@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Elintézendő dolgok listája:</h3>
+
+    <form method="POST" action="/tasks/">
+        {%csrf_token%}
+        {{ form.tasklist }}
+        {{ form.task_title }}
+        <input type="submit" name="Create Task">
+    </form>
+
+    {% for task in tasks %}
+         <div>
+             <a href="{% url 'update_task' task.id %}">Update</a>
+             {{ task }}
+         </div>
+    {% endfor %}
+
+{% endblock %}

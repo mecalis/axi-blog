@@ -2,12 +2,20 @@
 
 
 {% block content %}
-    
-    <div class='row'>
-    {% for object in object_list %}
-        {% include 'blog/list-inline.html' with blog_post=object truncate=True detail=False %}
-    {% endfor %}
-</div>
+
+
+        <div class='row'>
+            {% if request.user.is_authenticated %}
+            <div class="col-12 col-md-10 mb-3 mx-auto">
+                <a href='/blog-new/'>Új hozzászólás írása</a>
+            </div>
+
+            {% endif %}
+            {% for object in object_list %}
+                {% include 'blog/list-inline.html' with blog_post=object truncate=True detail=False %}
+            {% endfor %}
+        </div>
+
 
 
 {% endblock %}

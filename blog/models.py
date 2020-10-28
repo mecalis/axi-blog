@@ -6,6 +6,14 @@ from django.utils import timezone
 
 User = settings.AUTH_USER_MODEL
 
+#from django.contrib.auth.models import User
+
+class Blogger(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='image/', blank=True, null=True)
+
+    def __str__(self):
+        return self.user
 
 class BlogPostQuerySet(models.QuerySet):
     def published(self):
