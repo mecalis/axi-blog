@@ -96,5 +96,7 @@ def logout_view(request):
 def not_logged_in(request):
     return render(request, 'not_logged_in.html', {})
 
+def bokeh_view(request):
+    return render(request, 'bokeh_template.html', {})
 
 

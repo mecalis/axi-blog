@@ -36,6 +36,7 @@ from .views import (
     not_logged_in,
     login_view,
     logout_view,
+    bokeh_view,
 )
 
 
@@ -63,6 +64,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page=home_page)),
     #path("logout/", auth_views.logout, {'next_page': '/'} ,name="logout"),
     #path('logout/', logout_view),
+
+    path('bokeh/', bokeh_view, name='bokeh'),
 
 ]
 
