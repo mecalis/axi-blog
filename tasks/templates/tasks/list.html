@@ -74,8 +74,34 @@
                  {% endif %}
              </div>
         {% endfor %}
+    </div>
 </div>
 
+
+<h3>TESZT</h3>
+<div class="row">
+    {% for listname, list_items in tasks_by_lists %}
+    <div class="center-column">
+        <form method="POST" action="/tasks/">
+            {%csrf_token%}
+            {{ form.tasklist }}
+            {{ form.task_title }}
+            <input class="btn btn-info" type="submit" name="Create Task">
+        </form>
+
+        <div class="todo-list">
+                <h3> {{listname}} by {{listname.owner}} </h3>
+                {% for list_item in list_items %}
+                <div class="item-row">
+                    <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' list_item.id %}">Delete</a>
+                    {{list_item}}
+                </div>
+                {% endfor %}
+
+        </div>
+    </div>
+
+    {% endfor %}
 </div>
 
 {% endblock %}

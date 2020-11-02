@@ -20,7 +20,9 @@
 </div>
 
 
-
+for tasklist_element in tasklist:
+        tasks = Task.objects.filter(tasklist__icontains=str(tasklist_element))
+        print('taskok a ',tasklist_element, 'listában:',task)
 
 
 

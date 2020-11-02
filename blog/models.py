@@ -13,7 +13,7 @@ class Blogger(models.Model):
     image = models.ImageField(upload_to='image/', blank=True, null=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 class BlogPostQuerySet(models.QuerySet):
     def published(self):
