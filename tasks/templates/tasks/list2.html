@@ -21,7 +21,15 @@
 
 	.center-column{
 		width:600px;
-		margin: 20px auto;
+		margin: 20px ;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+	.center-form{
+        width:600px;
+		margin: 20px;
 		padding:20px;
 		background-color: #fff;
 		border-radius: 3px;
@@ -45,39 +53,50 @@
 
 </style>
 
-
-
-
 {% extends "base.html" %}
 
 {% block content %}
-
-<h3>TESZT</h3>
-<div class="row">
-    {% for listname, list_items in tasks_by_lists %}
-    <div class="center-column">
-        <div class="todo-list">
-                <h3> {{listname}} by {{listname.owner}}
-                    <form action="{% url 'list_detail' listname.id %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="listname" value="{{ listname.id}}" />
-                        <button type="submit" class="btn btn-secondary">
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>Beállítások
-                        </button>
-
-                    </form>
-                </h3>
-                {% for list_item in list_items %}
-                <div class="item-row">
-                    <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' list_item.id %}">Delete</a>
-                    {{list_item}}
-                </div>
-                {% endfor %}
+<div class="container-flow">
+    <h3>TESZT</h3>
+    <div class="row">
+        <div class="center-form float-left">
+            <form method="POST" action="/tasks/">
+                {%csrf_token%}
+                {{ form.list_title }}
+                <input class="btn btn-info" type="submit" name="Create Lists">
+            </form>
 
         </div>
     </div>
 
-    {% endfor %}
+
+
+    <div class="row">
+        {% for listname, list_items in tasks_by_lists %}
+        <div class="center-column">
+            <div class="todo-list">
+                    <h3> {{ listname }} by {{ listname.owner }}
+                        <form action="{% url 'list_detail' listname.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="listname" value="{{ listname.id}}" />
+                            <button type="submit" class="btn btn-secondary">
+                                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>Módosítás!
+                            </button>
+
+                        </form>
+                    </h3>
+                    {% for list_item in list_items %}
+                    <div class="item-row">
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' list_item.id %}">Delete</a>
+                        {{list_item}}
+                    </div>
+                    {% endfor %}
+
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

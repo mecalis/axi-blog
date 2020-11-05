@@ -42,7 +42,7 @@ class TaskListModel2(models.Model):
         return str(self.list_title)
 
 class TaskListModel3(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     shared = models.CharField(max_length=200, null=True, blank=True)
     list_title = models.CharField(max_length=200)
 
@@ -50,7 +50,7 @@ class TaskListModel3(models.Model):
         return self.list_title
 
 class Task3(models.Model):
-    tasklist = models.ForeignKey(TaskListModel3, on_delete=models.CASCADE)
+    tasklist = models.ForeignKey(TaskListModel3, on_delete=models.CASCADE, null=True, blank=True)
     task_title = models.CharField(max_length=200, null=True, blank=True)
     complete = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
