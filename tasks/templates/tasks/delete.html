@@ -1,10 +1,24 @@
-<p>Biztosan törölni akarod {{item}} ?</p>
 
-<a href="{% url 'index_page2' %}">Cancel</a>
+{% extends "base.html" %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    <input type="submit" name="Confirm" >
+{% block content %}
+<div class="container-flow">
+    <div class="col-5">
+        <div class="row">
+            <h3>Biztosan törölni akarod a "{{item}}" feladatot a listáról?</h3>
+        </div>
+        <div class="row">
+            <div class="col col-3 floatleft">
+                <a href="{% url 'index_page2' %}">Mégsem!</a>
+            </div>
+            <div class="col col-3 float-right">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" name="Confirm" >
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-</form>
+{% endblock %}

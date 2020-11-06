@@ -120,3 +120,10 @@ def list_detail(request, pk):
 
     context = {'tasks_in_list': tasks_in_list, 'list': list, 'form': form}
     return render(request, 'tasks/listdetail.html', context)
+
+def delete_list(request, pk):
+    list = TaskListModel3.objects.get(id=pk)
+
+    list.delete()
+    return redirect(index2)
+

@@ -53,33 +53,37 @@
 {% block content %}
 
 
-<div class="row">
-    <div class="center-column">
-        <div class="todo-list">
-                <h3> {{list}} by {{list.owner}}
+    <div class="row">
+        <div class="center-column">
+            <div class="todo-list">
 
-                </h3>
-                <form method="POST" action=".">
-                    {%csrf_token%}
-                    {{ form.task_title }}
-                    <input type="hidden" name="tasklist" value="{{ list }}" />
-                    <input class="btn btn-info" type="submit" name="Create Task">
-                </form>
+                    <h3 class="float-left"> {{list}} by {{list.owner}}
+                        <a class="btn btn-sm btn-danger float-right" href="{% url 'delete_list' list.id %}">Delete List</a>
 
-                {% for task in tasks_in_list %}
-                <div class="item-row">
-                   
+                    </h3>
 
-                    <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
-                     {{task}}
+                    <form method="POST" action=".">
+                        {%csrf_token%}
+                        {{ form.task_title }}
+                        <input type="hidden" name="tasklist" value="{{ list }}" />
+                        <input class="btn btn-info" type="submit" name="Create Task">
+                    </form>
 
-                </div>
-                {% endfor %}
+                    {% for task in tasks_in_list %}
+                    <div class="item-row">
 
+
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
+                         {{task}}
+
+                    </div>
+                    {% endfor %}
+
+            </div>
         </div>
+
+
     </div>
 
-
-</div>
 
 {% endblock %}
