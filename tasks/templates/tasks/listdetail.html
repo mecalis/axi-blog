@@ -52,7 +52,6 @@
 
 {% block content %}
 
-<h3>TESZT</h3>
 
 <div class="row">
     <div class="center-column">
@@ -60,17 +59,20 @@
                 <h3> {{list}} by {{list.owner}}
 
                 </h3>
-                <form method="POST" action="{% url 'list_detail' list.pk %}">
+                <form method="POST" action=".">
                     {%csrf_token%}
                     {{ form.task_title }}
-                    <input type="hidden" name="tasklist" value="{{ list}}" />
+                    <input type="hidden" name="tasklist" value="{{ list }}" />
                     <input class="btn btn-info" type="submit" name="Create Task">
                 </form>
 
                 {% for task in tasks_in_list %}
                 <div class="item-row">
+                   
+
                     <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
-                    {{task}}
+                     {{task}}
+
                 </div>
                 {% endfor %}
 
