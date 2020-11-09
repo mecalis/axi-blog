@@ -59,27 +59,27 @@ def deleteTask2(request, pk):
 
 def index2(request):
     tasklistnames = TaskListModel3.objects.all()
-    print('Listák nevei:',tasklistnames)
-    print('\n-------------')
+    # print('Listák nevei:',tasklistnames)
+    # print('\n-------------')
 
     tasks_by_lists = []
     list = []
     for tasklistname in tasklistnames:
-        print('Tasklista neve:', tasklistname, 'elemei:\n')
+        #print('Tasklista neve:', tasklistname, 'elemei:\n')
         task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistname)
-        print(task_in_list, '\n')
+        #print(task_in_list, '\n')
         sublist = [tasklistname, task_in_list]
         tasks_by_lists.append(sublist)
 
     form = TaskListModel3Form()
 
     if request.method == 'POST':
-        print('POST')
-        print('POST user:', request.user)
+        #print('POST')
+        #print('POST user:', request.user)
         form = TaskListModel3Form(request.POST)
 
         if form.is_valid():
-            print('valid? valid')
+            #print('valid? valid')
             obj = form.save(commit=False)
             obj.owner = request.user
             obj.save()
