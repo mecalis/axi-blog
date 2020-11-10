@@ -23,3 +23,9 @@ class Task3ModelForm(forms.ModelForm):
     class Meta:
         model= Task3
         fields = '__all__'
+
+class Task3Form(forms.ModelForm):
+    task_title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Módosítás'}))
+    class Meta:
+        model= Task3
+        fields = '__all__'

@@ -38,6 +38,16 @@
 		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
 	}
 
+	.item-row-done{
+		background-color: #F3F3F3;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: #5D65FE;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+
 	.btn-danger{
 		background-color: #ffae19;
 		border-color: #e59400;
@@ -70,13 +80,23 @@
                     </form>
 
                     {% for task in tasks_in_list %}
-                    <div class="item-row">
-
-
-                        <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
-                         {{task}}
-
-                    </div>
+                    {% if task.complete == True %}
+                        <div class="item-row-done">
+                            <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
+                            <strike>{{ task }}</strike>
+                            <div class="float-right">
+                            <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="item-row">
+                            <a class="btn btn-sm btn-danger" href="{% url 'delete_task2' task.id %}">Delete</a>
+                                <span>{{ task }}</span>
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
+                            </div>
+                        </div>
+                    {% endif %}
                     {% endfor %}
 
             </div>

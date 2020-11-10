@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from .models import Task,Task2, Task3, TaskListModel, TaskListModel2, TaskListModel3
-from .forms import TaskForm, TaskListModel3Form, Task3ModelForm
+from .forms import TaskForm, TaskListModel3Form, Task3ModelForm, Task3Form
 
 # Create your views here.
 def index(request):
@@ -128,4 +128,18 @@ def delete_list(request, pk):
 
     list.delete()
     return redirect(index2)
+
+def taskupdate(request, pk):
+    task = Task3.objects.get(id=pk)
+    form = Task3Form(instance=task)
+
+    if request.method == 'POST':
+        form = Task3Form(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect(index2)
+
+    context = {'form': form}
+    return render(request, 'tasks/update_task.html', context)
+
 
