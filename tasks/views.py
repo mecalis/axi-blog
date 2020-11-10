@@ -92,6 +92,7 @@ def index2(request):
 
 def list_detail(request, pk):
     list = TaskListModel3.objects.get(id=pk)
+    list_title = list.list_title
     #print('A küldött list:', list)
 
     if request.method == 'POST':
@@ -116,7 +117,7 @@ def list_detail(request, pk):
 
     form = Task3ModelForm()
 
-    tasks_in_list = Task3.objects.filter(tasklist__list_title__iexact=list)
+    tasks_in_list = Task3.objects.filter(tasklist__list_title__iexact=list_title)
     #print('A küldött tasks_in_list:', tasks_in_list)
 
     context = {'tasks_in_list': tasks_in_list, 'list': list, 'form': form}
