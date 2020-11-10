@@ -65,8 +65,9 @@ def index2(request):
     tasks_by_lists = []
     list = []
     for tasklistname in tasklistnames:
+        tasklistnametitle = str(tasklistname.list_title)
         #print('Tasklista neve:', tasklistname, 'elemei:\n')
-        task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistname)
+        task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistnametitle)
         #print(task_in_list, '\n')
         sublist = [tasklistname, task_in_list]
         tasks_by_lists.append(sublist)

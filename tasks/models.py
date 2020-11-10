@@ -46,6 +46,7 @@ class TaskListModel3(models.Model):
     shared = models.CharField(max_length=200, null=True, blank=True)
     list_title = models.CharField(max_length=200)
 
+
     def __str__(self):
         return str(self.list_title)
 
@@ -54,6 +55,9 @@ class Task3(models.Model):
     task_title = models.CharField(max_length=200, null=True, blank=True)
     complete = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
 
     def __str__(self):
         return str(self.task_title)
