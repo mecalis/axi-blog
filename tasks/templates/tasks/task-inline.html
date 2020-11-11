@@ -1,0 +1,42 @@
+{% if task.complete == True %}
+    <div class="row item-row-done">
+
+            <form action="{% url 'delete_task2' task.id %}" method="POST" class="float-left">
+                {%csrf_token%}
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+
+            <form action="{% url 'tasktoggle' task.id %}" method="POST" class="float-left">
+                {%csrf_token%}
+                <input type="hidden" name="list_id", value="{{ list.id }}">
+                <button class="btn btn-primary" type="submit">Mégsem!</button>
+            </form>
+
+
+            <strike>{{ task }}</strike>
+
+        <div class="float-right">
+            <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
+        </div>
+
+    </div>
+    {% else %}
+    <div class="item-row">
+
+        <form action="{% url 'delete_task2' task.id %}" method="POST" class="float-left">
+                {%csrf_token%}
+                <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+
+        <form action="{% url 'tasktoggle' task.id %}" method="POST" class="float-left">
+            {%csrf_token%}
+            <input type="hidden" name="list_id" value="{{ list.id }}">
+            <button class="btn btn-primary" type="submit">Kész!</button>
+        </form>
+
+        <span>{{ task }}</span>
+        <div class="float-right">
+            <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
+        </div>
+    </div>
+{% endif %}

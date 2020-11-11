@@ -132,7 +132,7 @@ def delete_list(request, pk):
 def taskupdate(request, pk):
     task = Task3.objects.get(id=pk)
     form = Task3Form(instance=task)
-
+    print('pk=', pk)
     if request.method == 'POST':
         form = Task3Form(request.POST, instance=task)
         if form.is_valid():
@@ -141,5 +141,19 @@ def taskupdate(request, pk):
 
     context = {'form': form}
     return render(request, 'tasks/update_task.html', context)
+
+def tasktoggle(request, pk):
+    list_id = request.POST.get('list_id')
+    if request.method == 'POST':
+        task = Task3.objects.get(pk=pk)
+        if task.complete == True:
+            print('Task complete', task.complete)
+            task.complete = False
+            task.save()
+        else:
+            task.complete = True
+            task.save()
+            print('Task complete', task.complete)
+    return redirect(list_detail, pk = list_id)
 
 
