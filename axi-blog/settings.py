@@ -42,6 +42,7 @@ INSTALLED_APPS = [ # components
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks',
+    'crispy_forms',
 
     'blog',
     'searches',
@@ -128,6 +129,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 
