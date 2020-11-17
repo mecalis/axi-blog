@@ -68,8 +68,8 @@
             <div class="todo-list">
 
                     <h3 class="float-left"> {{list}} by {{list.owner}}
-                        <a class="btn btn-sm btn-danger float-right" href="{% url 'delete_list' list.id %}">Delete List</a>
-
+                        <a class="btn btn-sm btn-danger float-right" href="{% url 'delete_list' list.id %}">Lista törlése</a>
+                        <a class="btn btn-sm btn-primary float-right" href="{% url 'update_list' list.id %}">Lista módosítása</a>
                     </h3>
 
                     <form method="POST" action=".">

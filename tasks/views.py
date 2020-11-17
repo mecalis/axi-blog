@@ -58,7 +58,9 @@ def deleteTask2(request, pk):
     return render(request, 'tasks/delete.html', context)
 
 def index2(request):
-    tasklistnames = TaskListModel3.objects.all()
+    user = request.user
+    #print('user:', user)
+    tasklistnames = TaskListModel3.objects.filter(owner=user) | TaskListModel3.objects.filter(shared__contains=user)
     # print('Listák nevei:',tasklistnames)
     # print('\n-------------')
 
@@ -68,7 +70,7 @@ def index2(request):
         tasklistnametitle = str(tasklistname.list_title)
         #print('Tasklista neve:', tasklistname, 'elemei:\n')
         task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistnametitle)
-        #print(task_in_list, '\n')
+        #print(str(task_in_list.query), '\n')
         sublist = [tasklistname, task_in_list]
         tasks_by_lists.append(sublist)
 
@@ -155,5 +157,20 @@ def tasktoggle(request, pk):
             task.save()
             print('Task complete', task.complete)
     return redirect(list_detail, pk = list_id)
+
+def updateList(request, pk):
+    list = TaskListModel3.objects.get(id=pk)
+    form = TaskListModel3Form(instance=list)
+
+    if request.method == 'POST':
+        form = TaskListModel3Form(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            list_id = list.id
+            return redirect(list_detail, pk = list_id)
+
+    context = {'form': form}
+    return render(request, 'tasks/update_list.html', context)
+
 
 

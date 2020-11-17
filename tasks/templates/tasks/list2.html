@@ -87,6 +87,8 @@
         <div class="center-column">
             <div class="todo-list">
                     <h3> {{ listname }} by {{ listname.owner }}
+
+
                         <form action="{% url 'list_detail' listname.id %}" method="post" style="display: inline;">
                             {% csrf_token %}
                             <input type="hidden" name="listname" value="{{ listname.id}}" />
@@ -96,7 +98,10 @@
                             </button>
 
                         </form>
-                    </h3>
+                        </h3>
+                        {% if listname.shared %}
+                        <p><small>Velük megosztva: {{ listname.shared }} </small></p>
+                        {% endif %}
                     {% for task in list_items %}
                         {% include 'tasks/task-inline.html' %}
                     {% endfor %}
