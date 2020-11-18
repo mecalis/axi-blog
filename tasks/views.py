@@ -58,39 +58,41 @@ def deleteTask2(request, pk):
     return render(request, 'tasks/delete.html', context)
 
 def index2(request):
-    user = request.user
-    #print('user:', user)
-    tasklistnames = TaskListModel3.objects.filter(owner=user) | TaskListModel3.objects.filter(shared__contains=user)
-    # print('Listák nevei:',tasklistnames)
-    # print('\n-------------')
+    if request.user.is_authenticated:
+        user = request.user
+        #print('user:', user)
+        tasklistnames = TaskListModel3.objects.filter(owner=user) | TaskListModel3.objects.filter(shared__contains=user)
+        # print('Listák nevei:',tasklistnames)
+        # print('\n-------------')
 
-    tasks_by_lists = []
-    list = []
-    for tasklistname in tasklistnames:
-        tasklistnametitle = str(tasklistname.list_title)
-        #print('Tasklista neve:', tasklistname, 'elemei:\n')
-        task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistnametitle)
-        #print(str(task_in_list.query), '\n')
-        sublist = [tasklistname, task_in_list]
-        tasks_by_lists.append(sublist)
+        tasks_by_lists = []
+        list = []
+        for tasklistname in tasklistnames:
+            tasklistnametitle = str(tasklistname.list_title)
+            #print('Tasklista neve:', tasklistname, 'elemei:\n')
+            task_in_list = Task3.objects.filter(tasklist__list_title__iexact=tasklistnametitle)
+            #print(str(task_in_list.query), '\n')
+            sublist = [tasklistname, task_in_list]
+            tasks_by_lists.append(sublist)
 
-    form = TaskListModel3Form()
+        form = TaskListModel3Form()
 
-    if request.method == 'POST':
-        #print('POST')
-        #print('POST user:', request.user)
-        form = TaskListModel3Form(request.POST)
+        if request.method == 'POST':
+            #print('POST')
+            #print('POST user:', request.user)
+            form = TaskListModel3Form(request.POST)
 
-        if form.is_valid():
-            #print('valid? valid')
-            obj = form.save(commit=False)
-            obj.owner = request.user
-            obj.save()
+            if form.is_valid():
+                #print('valid? valid')
+                obj = form.save(commit=False)
+                obj.owner = request.user
+                obj.save()
 
-        return redirect(index2)
+            return redirect(index2)
 
-    context = {'form': form, 'tasks_by_lists' : tasks_by_lists}
-    return render(request, 'tasks/list2.html', context)
+        context = {'form': form, 'tasks_by_lists' : tasks_by_lists}
+        return render(request, 'tasks/list2.html', context)
+    return render(request, 'home.html', {})
 
 def list_detail(request, pk):
     list = TaskListModel3.objects.get(id=pk)

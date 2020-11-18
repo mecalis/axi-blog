@@ -10,18 +10,22 @@ from .forms import UserFrorm
 
 from .forms import ContactForm
 from blog.models import BlogPost
+from tasks.models import Task3, TaskListModel3
 
 
 def home_page(request):
     my_title = "Helló, helló!"
-    qs = BlogPost.objects.all()[:3]
+    qs = BlogPost.objects.all()[:8]
+
     form = UserFrorm
     context = {"title": "Üdv itt. Minden tesztelés alatt!", 'blog_list': qs, "form": form}
+    if request.user.is_authenticated:
+
+        user = request.user
+        tasks = Task3.objects.filter(tasklist__owner=user)[:5]
+        context['tasks'] = tasks
     return render(request, "home.html", context)
 
-
-def about_page(request):
-    return render(request, "about.html", {"title": "About"})
 
 
 
@@ -35,15 +39,6 @@ def contact_page(request):
         "form": form
     }
     return render(request, "form.html", context)
-
-
-
-def example_page(request):
-    context         =  {"title": "Example"}
-    template_name   = "hello_world.html" 
-    template_obj    = get_template(template_name)
-    rendered_item   = template_obj.render(context)
-    return HttpResponse(rendered_item)
 
 class UserFormView(View):
     form_class = UserFrorm
@@ -80,9 +75,9 @@ def login_view(request):
     #password = request.POST['password']
     username = request.POST.get('username')
     password = request.POST.get('password')
-    print(request)
+    #print(request)
     user = authenticate(request, username=username, password=password)
-    print(username, password)
+    #print(username, password)
     if user is not None:
         login(request, user)
         return redirect(home_page)

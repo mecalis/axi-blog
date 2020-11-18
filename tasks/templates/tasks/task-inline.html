@@ -13,7 +13,7 @@
         </form>
 
 
-        <strike>{{ task }}</strike>
+        <strike id="{{task.id}}">{{ task }}</strike>
 
         <div class="float-right">
             <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
@@ -34,7 +34,7 @@
             <button class="btn btn-primary" type="submit">Kész!</button>
         </form>
 
-        <span>{{ task }}</span>
+        <span id="{{task.id}}" class="task_done">{{ task }}</span>
         <div class="float-right">
             <a class="btn btn-sm btn-primary" href="{% url 'taskupdate' task.id %}">Módosítás</a>
         </div>

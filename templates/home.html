@@ -3,11 +3,22 @@
 {% block content %}
 
 <h1>{{ title }}</h1>
+<div class="col-3 float-left">
 
+    <div class="row">
+        <h3>Legutoljára felvett feladataim:</h3>
+    </div>
 
-{% for a in blog_list %}
-    {% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
-{% endfor %}
+    {% include 'tasks/listdetail_for_home.html' %}
+
+</div>
+
+<div class="col-9 float-right">
+    <h3>Blogbejegyzések:</h3>
+    {% for a in blog_list %}
+        {% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
+    {% endfor %}
+</div>
 
 
     

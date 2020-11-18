@@ -30,9 +30,9 @@ from django.contrib.auth import views as auth_views
 from searches.views import search_view
 from .views import (
     home_page,
-    about_page,
+
     contact_page,
-    example_page,
+
     not_logged_in,
     login_view,
     logout_view,
@@ -47,11 +47,9 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('search/', search_view),
     # re_path(r'^blog/(?P<slug>\w+)/$', blog_post_detail_view),
-    path('page/', about_page),
-    path('pages/', about_page),
-    re_path(r'^pages?/$', about_page),
-    re_path(r'^about/$', about_page),
-    path('example/', example_page),
+
+
+
     path('contact/', contact_page),
     path('admin/', admin.site.urls),
 
