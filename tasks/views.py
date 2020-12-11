@@ -174,5 +174,15 @@ def updateList(request, pk):
     context = {'form': form}
     return render(request, 'tasks/update_list.html', context)
 
+def list_clear(request, pk):
+    if request.method == 'POST':
+        tasks = Task3.objects.filter(tasklist__pk=pk)
+        filtered_tasks = tasks.filter(complete = True)
+        print(filtered_tasks.query)
+        filtered_tasks.delete()
+        return redirect(list_detail, pk=pk)
+
+
+
 
 

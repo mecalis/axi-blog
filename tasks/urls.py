@@ -11,4 +11,5 @@ urlpatterns = [
     path('taskupdate/<str:pk>/', views.taskupdate, name='taskupdate'),
     path('tasktoggle/<str:pk>/', views.tasktoggle, name='tasktoggle'),
     path('update_list/<str:pk>/', views.updateList, name='update_list'),
+    path('list_clear/<str:pk>/', views.list_clear, name='list_clear'),
 ]

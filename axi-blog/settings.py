@@ -46,6 +46,7 @@ INSTALLED_APPS = [ # components
 
     'blog',
     'searches',
+    'food',
 ]
 
 MIDDLEWARE = [
